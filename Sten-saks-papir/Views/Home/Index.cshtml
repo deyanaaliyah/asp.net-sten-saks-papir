@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Sten_saks_papir.Models.Match>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th></th>
+    </tr>
+
+    <tr>
+        <th>ID</th>
+        <td>Player 1</td>
+        <td>Player 2</td>
+        <td>Ledig plads</td>
+        <td>Join</td>
+    </tr>
+    <tr>
+        @foreach (var item in Model)
+        {
+            <th>
+                @item.Id
+            </th>
+            <th>
+                @if (item.Player1 != null)
+                {
+                    @item.Player1.Name
+                }
+            </th>
+            <th>
+                @if (item.Player2 != null)
+                {
+                    @item.Player2.Name
+                }
+            </th>
+            if (item.Player1 != null)
+            {
+                if (item.Player1.IsAlone == true)
+                {
+                    <th>✔️</th>
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { id = item.Id })
+                    </td>
+                }
+                else
+                {
+                    <th>⛔</th>
+                }
+            }
+            if (item.Player2 != null)
+            {
+                if (item.Player2.IsAlone == true)
+                {
+                    <th>✔️</th>
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { id = item.Id })
+                    </td>
+                }
+                else
+                {
+                    <th>⛔</th>
+                }
+            }
+        }
+    </tr>
+
+</table>
